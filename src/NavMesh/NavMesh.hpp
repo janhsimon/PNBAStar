@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include <wx\wx.h>
+#include <wx/wx.h>
 
 #include "NavMeshNode.hpp"
 
@@ -14,6 +14,8 @@ class NavMesh
 		void addNode(NavMeshNode *node);
 		void deleteNode(NavMeshNode *node);
 		void deleteSelectedNode();
+
+		inline std::vector<NavMeshNode*> *getNodes() { return &nodes; }
 
 		inline NavMeshNode *getSelectedNode() const { return selectedNode; }
 		inline void setSelectedNode(NavMeshNode *selectedNode) { this->selectedNode = selectedNode; }
@@ -28,6 +30,10 @@ class NavMesh
 		void moveNode(NavMeshNode *node, const wxPoint &point);
 
 		void connectNodes(NavMeshNode *a, NavMeshNode *b);
+
+		float calculateDistanceBetweenNodes(NavMeshNode *a, NavMeshNode *b) const;
+
+		void resetPathPointers();
 
 		void render();
 

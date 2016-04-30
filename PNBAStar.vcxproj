@@ -16,6 +16,7 @@
     <ClCompile Include="src\MainFrame.cpp" />
     <ClCompile Include="src\NavMesh\NavMesh.cpp" />
     <ClCompile Include="src\NavMesh\NavMeshNode.cpp" />
+    <ClCompile Include="src\Pathfinder\AStarPathfinder.cpp" />
     <ClCompile Include="src\SideBar.cpp" />
     <ClCompile Include="src\Tool\ConnectNodeTool.cpp" />
     <ClCompile Include="src\Tool\EditNodeTool.cpp" />
@@ -27,6 +28,8 @@
     <ClInclude Include="src\MainFrame.hpp" />
     <ClInclude Include="src\NavMesh\NavMesh.hpp" />
     <ClInclude Include="src\NavMesh\NavMeshNode.hpp" />
+    <ClInclude Include="src\Pathfinder\AStarPathfinder.hpp" />
+    <ClInclude Include="src\Pathfinder\IPathfinder.hpp" />
     <ClInclude Include="src\SideBar.hpp" />
     <ClInclude Include="src\Tool\ConnectNodeTool.hpp" />
     <ClInclude Include="src\Tool\EditNodeTool.hpp" />

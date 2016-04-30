@@ -28,5 +28,7 @@ private:
 	SideBar *sideBar;
 	NavMesh *navMesh;
 
+	wxToolTip *nodeInfoToolTip;
+
 	DECLARE_EVENT_TABLE()
 };

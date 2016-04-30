@@ -1,4 +1,5 @@
 #include <cassert>
+#include <sstream>
 
 #include "DrawPane.hpp"
 
@@ -20,6 +21,11 @@ DrawPane::DrawPane(wxWindow *parent, SideBar *sideBar, NavMesh *navMesh) : wxGLC
 	
 	assert(sideBar);
 	this->sideBar = sideBar;
+
+	nodeInfoToolTip = new wxToolTip("");
+	nodeInfoToolTip->Enable(false);
+	nodeInfoToolTip->SetDelay(0);
+	SetToolTip(nodeInfoToolTip);
 }
 
 void DrawPane::paintEvent(wxPaintEvent&)
@@ -65,6 +71,22 @@ void DrawPane::mouseMotionEvent(wxMouseEvent &event)
 	ITool *selectedTool = sideBar->getSelectedTool();
 	assert(selectedTool);
 	selectedTool->mouseMotionEvent(event);
+
+	assert(navMesh);
+	NavMeshNode *selectedNode = navMesh->getSelectedNode();
+	assert(nodeInfoToolTip);
+	if (selectedNode)
+	{
+		nodeInfoToolTip->Enable(true);
+		
+		std::stringstream s;
+		s << "Forward Cost: " << selectedNode->getForwardCost() << std::endl;
+		s << "Backwards Cost: " << selectedNode->getBackwardsCost() << std::endl;
+		s << "Total Cost: " << selectedNode->getTotalCost();
+		nodeInfoToolTip->SetTip(s.str());
+	}
+	else
+		nodeInfoToolTip->Enable(false);
 }
 
 void DrawPane::render()

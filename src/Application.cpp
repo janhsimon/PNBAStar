@@ -35,15 +35,16 @@ END_EVENT_TABLE()
 
 bool Application::OnInit()
 {
-	navMesh = new NavMesh();
-
 	mainFrame = new MainFrame("PNBA* -- written by Jan Simon", wxDefaultPosition, wxDefaultSize);
 	
 	wxBoxSizer *layout = new wxBoxSizer(wxHORIZONTAL);
 	mainFrame->SetSizer(layout);
 
-	sideBar = new SideBar(mainFrame, navMesh);
-	drawPane = new DrawPane(mainFrame, sideBar, navMesh);
+	sideBar = new SideBar(mainFrame);
+
+	assert(sideBar);
+	assert(sideBar->getNavMesh());
+	drawPane = new DrawPane(mainFrame, sideBar, sideBar->getNavMesh());
 
 	layout->Add(drawPane, 1, wxEXPAND | wxALL, 10);
 	layout->Add(sideBar, 0, wxEXPAND, 0);

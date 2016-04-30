@@ -2,7 +2,7 @@
 
 #include "NavMesh.hpp"
 
-const float NavMesh::SELECTION_RADIUS = 25.0f;
+const float NavMesh::SELECTION_RADIUS = 20.0f;
 
 NavMesh::NavMesh()
 {
@@ -39,6 +39,15 @@ void NavMesh::deleteNode(NavMeshNode *node)
 			++i;
 		}
 	}
+
+	if (node == selectedNode)
+		selectedNode = nullptr;
+
+	if (node == startNode)
+		startNode = nullptr;
+
+	if (node == goalNode)
+		goalNode = nullptr;
 }
 
 void NavMesh::deleteSelectedNode()
@@ -81,17 +90,40 @@ void NavMesh::connectNodes(NavMeshNode *a, NavMeshNode *b)
 	b->addAdjacentNode(a);
 }
 
+float NavMesh::calculateDistanceBetweenNodes(NavMeshNode *a, NavMeshNode *b) const
+{
+	float x = b->getX() - a->getX();
+	float y = b->getY() - a->getY();
+	return x * x + y * y;
+}
+
+void NavMesh::resetPathPointers()
+{
+	for (NavMeshNode *node : nodes)
+		node->setPathPointer(nullptr);
+}
+
 void NavMesh::render()
 {
 	for (NavMeshNode *node : nodes)
+		node->renderConnections(0.0f, 0.0f, 0.0f);
+
+	for (NavMeshNode *node : nodes)
 	{
+		float r = 0.0f;
+		float g = 0.0f;
+		float b = 0.0f;
+
 		if (node == selectedNode)
-			node->render(1.0f, 0.0f, 1.0f);
-		else if (node == startNode)
-			node->render(0.0f, 1.0f, 0.0f);
+			b = 1.0f;
+
+		if (node == startNode)
+			node->renderStartNode(r, g, b);
 		else if (node == goalNode)
-			node->render(1.0f, 0.0f, 0.0f);
+			node->renderGoalNode(r, g, b);
 		else
-			node->render(0.0f, 0.0, 1.0f);
+			node->renderNormalNode(r, g, b);
+
+		node->renderPathPointer(1.0f, 0.0f, 1.0f);
 	}
 }

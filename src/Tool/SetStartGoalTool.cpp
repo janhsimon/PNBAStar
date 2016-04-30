@@ -16,7 +16,7 @@ void SetStartGoalTool::leftMouseButtonUpEvent(wxMouseEvent &event)
 
 	NavMeshNode *mouseNode = navMesh->getSelectedNode();
 
-	if (mouseNode)
+	if (mouseNode && mouseNode != navMesh->getGoalNode())
 		navMesh->setStartNode(mouseNode);
 }
 
@@ -31,7 +31,7 @@ void SetStartGoalTool::rightMouseButtonUpEvent(wxMouseEvent &event)
 
 	NavMeshNode *mouseNode = navMesh->getSelectedNode();
 
-	if (mouseNode)
+	if (mouseNode && mouseNode != navMesh->getStartNode())
 		navMesh->setGoalNode(mouseNode);
 }
 

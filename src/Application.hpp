@@ -5,7 +5,6 @@
 #include "DrawPane.hpp"
 #include "MainFrame.hpp"
 #include "SideBar.hpp"
-#include "NavMesh/NavMesh.hpp"
 
 class Application : public wxApp
 {
@@ -14,10 +13,9 @@ public:
 	void idleEvent(wxIdleEvent &event);
 
 private:
-	NavMesh *navMesh;
 	MainFrame *mainFrame;
-	DrawPane *drawPane;
 	SideBar *sideBar;
+	DrawPane *drawPane;
 
 	DECLARE_EVENT_TABLE()
 };
