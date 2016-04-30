@@ -1,7 +1,7 @@
-# pnbastar
+# PNBAstar
 A Parallel New Bidirectional A* implementation using Intel's Threading Building Blocks library.
 
-Libraries used:
+Using:
 TBB
 wxWidgets
 OpenGL
