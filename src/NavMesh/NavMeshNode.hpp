@@ -11,10 +11,10 @@ public:
 	inline float getY() const { return y; }
 	inline void setPosition(float x, float y) { this->x = x; this->y = y; }
 
-	inline std::vector<NavMeshNode*> getAdjacentNodes() const { return adjacentNodes; }
+	inline std::vector<NavMeshNode*> *getAdjacentNodes() { return &adjacentNodes; }
 	inline void addAdjacentNode(NavMeshNode *node) { adjacentNodes.push_back(node); }
 	
-	void render(bool selected) const;
+	void render(float r, float g, float b) const;
 
 private:
 	static const float ICON_SIZE;

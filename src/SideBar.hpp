@@ -2,8 +2,8 @@
 
 #include <wx/wx.h>
 
-#include "ITool.hpp"
-#include "NavMesh.hpp"
+#include "NavMesh/NavMesh.hpp"
+#include "Tool/ITool.hpp"
 
 class SideBar : public wxPanel
 {

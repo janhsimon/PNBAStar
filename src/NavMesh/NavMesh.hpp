@@ -19,6 +19,12 @@ class NavMesh
 		inline void setSelectedNode(NavMeshNode *selectedNode) { this->selectedNode = selectedNode; }
 		void selectNodeClosestTo(const wxPoint &point);
 
+		inline NavMeshNode *getStartNode() const { return startNode; }
+		inline void setStartNode(NavMeshNode *startNode) { this->startNode = startNode; }
+
+		inline NavMeshNode *getGoalNode() const { return goalNode; }
+		inline void setGoalNode(NavMeshNode *goalNode) { this->goalNode = goalNode; }
+
 		void moveNode(NavMeshNode *node, const wxPoint &point);
 
 		void connectNodes(NavMeshNode *a, NavMeshNode *b);
@@ -29,5 +35,5 @@ class NavMesh
 		static const float SELECTION_RADIUS;
 
 		std::vector<NavMeshNode*> nodes;
-		NavMeshNode *selectedNode;
+		NavMeshNode *selectedNode, *startNode, *goalNode;
 };

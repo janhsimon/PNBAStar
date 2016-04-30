@@ -2,10 +2,10 @@
 
 #include "ITool.hpp"
 
-class MoveNodeTool : public ITool
+class EditNodeTool : public ITool
 {
 public:
-	MoveNodeTool(NavMesh *navMesh);
+	EditNodeTool(NavMesh *navMesh);
 
 	void leftMouseButtonDownEvent(wxMouseEvent &event);
 	void leftMouseButtonUpEvent(wxMouseEvent &event);

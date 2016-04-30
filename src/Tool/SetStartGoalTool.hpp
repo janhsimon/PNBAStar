@@ -2,10 +2,10 @@
 
 #include "ITool.hpp"
 
-class AddNodeTool : public ITool
+class SetStartGoalTool : public ITool
 {
 public:
-	AddNodeTool(NavMesh *navMesh);
+	SetStartGoalTool(NavMesh *navMesh);
 
 	void leftMouseButtonDownEvent(wxMouseEvent &event);
 	void leftMouseButtonUpEvent(wxMouseEvent &event);

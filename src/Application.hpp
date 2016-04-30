@@ -4,8 +4,8 @@
 
 #include "DrawPane.hpp"
 #include "MainFrame.hpp"
-#include "NavMesh.hpp"
 #include "SideBar.hpp"
+#include "NavMesh/NavMesh.hpp"
 
 class Application : public wxApp
 {

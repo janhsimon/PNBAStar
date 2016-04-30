@@ -9,12 +9,9 @@ NavMeshNode::NavMeshNode(const wxPoint &point)
 	setPosition(point.x, point.y);
 }
 
-void NavMeshNode::render(bool selected) const
+void NavMeshNode::render(float r, float g, float b) const
 {
-	if (selected)
-		glColor3f(1.0f, 0.0f, 1.0f);
-	else
-		glColor3f(0.0f, 0.0f, 1.0f);
+	glColor3f(r, g, b);
 
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex2f(x,				y - ICON_SIZE);

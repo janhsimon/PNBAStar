@@ -11,27 +11,27 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\AddNodeTool.cpp" />
     <ClCompile Include="src\Application.cpp" />
-    <ClCompile Include="src\ConnectNodeTool.cpp" />
     <ClCompile Include="src\DrawPane.cpp" />
     <ClCompile Include="src\MainFrame.cpp" />
-    <ClCompile Include="src\MoveNodeTool.cpp" />
-    <ClCompile Include="src\NavMesh.cpp" />
-    <ClCompile Include="src\NavMeshNode.cpp" />
+    <ClCompile Include="src\NavMesh\NavMesh.cpp" />
+    <ClCompile Include="src\NavMesh\NavMeshNode.cpp" />
     <ClCompile Include="src\SideBar.cpp" />
+    <ClCompile Include="src\Tool\ConnectNodeTool.cpp" />
+    <ClCompile Include="src\Tool\EditNodeTool.cpp" />
+    <ClCompile Include="src\Tool\SetStartGoalTool.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\AddNodeTool.hpp" />
     <ClInclude Include="src\Application.hpp" />
-    <ClInclude Include="src\ConnectNodeTool.hpp" />
     <ClInclude Include="src\DrawPane.hpp" />
-    <ClInclude Include="src\ITool.hpp" />
     <ClInclude Include="src\MainFrame.hpp" />
-    <ClInclude Include="src\MoveNodeTool.hpp" />
-    <ClInclude Include="src\NavMesh.hpp" />
-    <ClInclude Include="src\NavMeshNode.hpp" />
+    <ClInclude Include="src\NavMesh\NavMesh.hpp" />
+    <ClInclude Include="src\NavMesh\NavMeshNode.hpp" />
     <ClInclude Include="src\SideBar.hpp" />
+    <ClInclude Include="src\Tool\ConnectNodeTool.hpp" />
+    <ClInclude Include="src\Tool\EditNodeTool.hpp" />
+    <ClInclude Include="src\Tool\ITool.hpp" />
+    <ClInclude Include="src\Tool\SetStartGoalTool.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{AD934C7F-6525-4E7F-913C-348D5DAB73B9}</ProjectGuid>

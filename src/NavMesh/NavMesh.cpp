@@ -1,12 +1,12 @@
-#include "NavMesh.hpp"
-
 #include <wx/glcanvas.h>
+
+#include "NavMesh.hpp"
 
 const float NavMesh::SELECTION_RADIUS = 25.0f;
 
 NavMesh::NavMesh()
 {
-	selectedNode = nullptr;
+	selectedNode = startNode = goalNode = nullptr;
 }
 
 void NavMesh::addNode(NavMeshNode *node)
@@ -19,14 +19,26 @@ void NavMesh::deleteNode(NavMeshNode *node)
 {
 	assert(node);
 
-	for (NavMeshNode *n : nodes)
+	for (std::vector<NavMeshNode*>::iterator i = nodes.begin(); i != nodes.end();)
 	{
-		// TODO: fix, removal during iteration
-		std::vector<NavMeshNode*> adjacentNodes = n->getAdjacentNodes();
-		adjacentNodes.erase(std::remove(adjacentNodes.begin(), adjacentNodes.end(), node));
-	}
+		if (*i == node)
+			i = nodes.erase(i);
+		else
+		{
+			std::vector<NavMeshNode*> *adjacentNodes = (*i)->getAdjacentNodes();
+			assert(adjacentNodes);
 
-	nodes.erase(std::remove(nodes.begin(), nodes.end(), node));
+			for (std::vector<NavMeshNode*>::iterator j = adjacentNodes->begin(); j != adjacentNodes->end();)
+			{
+				if (*j == node)
+					j = adjacentNodes->erase(j);
+				else
+					++j;
+			}
+
+			++i;
+		}
+	}
 }
 
 void NavMesh::deleteSelectedNode()
@@ -72,5 +84,14 @@ void NavMesh::connectNodes(NavMeshNode *a, NavMeshNode *b)
 void NavMesh::render()
 {
 	for (NavMeshNode *node : nodes)
-		node->render(node == selectedNode);
+	{
+		if (node == selectedNode)
+			node->render(1.0f, 0.0f, 1.0f);
+		else if (node == startNode)
+			node->render(0.0f, 1.0f, 0.0f);
+		else if (node == goalNode)
+			node->render(1.0f, 0.0f, 0.0f);
+		else
+			node->render(0.0f, 0.0, 1.0f);
+	}
 }

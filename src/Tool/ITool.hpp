@@ -2,7 +2,7 @@
 
 #include <wx/wx.h>
 
-#include "NavMesh.hpp"
+#include "../NavMesh/NavMesh.hpp"
 
 class ITool
 {

@@ -3,8 +3,8 @@
 #include <wx/glcanvas.h>
 #include <wx/wx.h>
 
-#include "NavMesh.hpp"
 #include "SideBar.hpp"
+#include "NavMesh/NavMesh.hpp"
 
 class DrawPane : public wxGLCanvas
 {
