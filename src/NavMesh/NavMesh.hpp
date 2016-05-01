@@ -27,6 +27,8 @@ class NavMesh
 		inline NavMeshNode *getGoalNode() const { return goalNode; }
 		inline void setGoalNode(NavMeshNode *goalNode) { this->goalNode = goalNode; }
 
+		inline void setShowFinalPathOnly(bool showFinalPathOnly) { this->showFinalPathOnly = showFinalPathOnly; }
+
 		void moveNode(NavMeshNode *node, const wxPoint &point);
 
 		void connectNodes(NavMeshNode *a, NavMeshNode *b);
@@ -42,4 +44,7 @@ class NavMesh
 
 		std::vector<NavMeshNode*> nodes;
 		NavMeshNode *selectedNode, *startNode, *goalNode;
+		bool showFinalPathOnly;
+
+		void renderFinalPath(NavMeshNode *node);
 };

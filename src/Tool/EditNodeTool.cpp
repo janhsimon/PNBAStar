@@ -45,9 +45,9 @@ void EditNodeTool::rightMouseButtonUpEvent(wxMouseEvent &event)
 void EditNodeTool::mouseMotionEvent(wxMouseEvent &event)
 {
 	assert(navMesh);
-
-	navMesh->selectNodeClosestTo(event.GetPosition());
+	wxPoint mousePosition = event.GetPosition();
+	navMesh->selectNodeClosestTo(mousePosition);
 	
 	if (draggingNode)
-		navMesh->moveNode(draggingNode, event.GetPosition());
+		navMesh->moveNode(draggingNode, mousePosition);
 }

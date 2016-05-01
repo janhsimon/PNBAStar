@@ -13,12 +13,6 @@ public:
 
 	inline std::vector<NavMeshNode*> *getAdjacentNodes() { return &adjacentNodes; }
 	inline void addAdjacentNode(NavMeshNode *node) { adjacentNodes.push_back(node); }
-	
-	void renderConnections(float r, float g, float b) const;
-	void renderNormalNode(float r, float g, float b) const;
-	void renderStartNode(float r, float g, float b) const;
-	void renderGoalNode(float r, float g, float b) const;
-	void renderPathPointer(float r, float g, float b) const;
 
 	inline float getForwardCost() const { return forwardCost; }
 	inline float getBackwardsCost() const { return backwardsCost; }
@@ -29,9 +23,20 @@ public:
 
 	inline NavMeshNode *getPathPointer() const { return pathPointer; }
 	inline void setPathPointer(NavMeshNode *pathPointer) { this->pathPointer = pathPointer; }
+
+	inline void setLinePosition(float x, float y) { lineX = x; lineY = y; }
+	inline void setLineEnable(bool enable) { lineEnable = enable; }
+
+	void renderConnections(float r, float g, float b) const;
+	void renderLine(float r, float g, float b) const;
+	void renderNormalNode(float r, float g, float b) const;
+	void renderStartNode(float r, float g, float b) const;
+	void renderGoalNode(float r, float g, float b) const;
+	void renderPathPointer(float r, float g, float b, bool invert) const;
 	
 private:
 	static const float ICON_SIZE;
+	static const float CONNECTION_WIDTH;
 	static const float PATH_POINTER_WIDTH;
 	static const float PATH_POINTER_ARROW_LENGTH;
 
@@ -40,4 +45,9 @@ private:
 
 	float forwardCost, backwardsCost, totalCost;
 	NavMeshNode *pathPointer;
+
+	float lineX, lineY;
+	bool lineEnable;
+
+	void renderLineTo(float x, float y, float r, float g, float b) const;
 };

@@ -115,6 +115,7 @@ void AStarPathfinder::findPath()
 		// step 4
 
 		std::vector<NavMeshNode*> *adjacentNodes = i->getAdjacentNodes();
+		assert(adjacentNodes);
 		for (std::vector<NavMeshNode*>::iterator j = adjacentNodes->begin(); j != adjacentNodes->end(); ++j)
 		{
 			if (isNodeOnClosedList(*j))

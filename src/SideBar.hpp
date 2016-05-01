@@ -22,6 +22,7 @@ private:
 
 	void toolRadioBoxEvent(wxCommandEvent &event);
 	void pathfinderRadioBoxEvent(wxCommandEvent &event);
+	void pathDisplayRadioBoxEvent(wxCommandEvent &event);
 	void findPathButtonEvent(wxCommandEvent&);
 	void resetPathButtonEvent(wxCommandEvent&);
 

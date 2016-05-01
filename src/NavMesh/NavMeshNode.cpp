@@ -3,28 +3,43 @@
 #include "NavMeshNode.hpp"
 
 const float NavMeshNode::ICON_SIZE = 12.0f;
+const float NavMeshNode::CONNECTION_WIDTH = 1.5f;
 const float NavMeshNode::PATH_POINTER_WIDTH = 2.5f;
 const float NavMeshNode::PATH_POINTER_ARROW_LENGTH = 12.0f;
 
 NavMeshNode::NavMeshNode(const wxPoint &point)
 {
 	setPosition(point.x, point.y);
-	
 	forwardCost = backwardsCost = totalCost = 0.0f;
 	pathPointer = nullptr;
+	lineEnable = false;
+}
+
+void NavMeshNode::renderLineTo(float x, float y, float r, float g, float b) const
+{
+	glColor3f(r, g, b);
+	glLineWidth(CONNECTION_WIDTH);
+
+	glBegin(GL_LINES);
+	glVertex2f(this->x, this->y);
+	glVertex2f(x, y);
+	glEnd();
+
+	glLineWidth(1.0f);
+}
+
+void NavMeshNode::renderLine(float r, float g, float b) const
+{
+	if (!lineEnable)
+		return;
+
+	renderLineTo(lineX, lineY, r, g, b);
 }
 
 void NavMeshNode::renderConnections(float r, float g, float b) const
 {
-	glColor3f(r, g, b);
-
 	for (NavMeshNode *adjacentNode : adjacentNodes)
-	{
-		glBegin(GL_LINES);
-		glVertex2f(x, y);
-		glVertex2f(adjacentNode->getX(), adjacentNode->getY());
-		glEnd();
-	}
+		renderLineTo(adjacentNode->getX(), adjacentNode->getY(), r, g, b);
 }
 
 void NavMeshNode::renderNormalNode(float r, float g, float b) const
@@ -67,13 +82,19 @@ void NavMeshNode::renderGoalNode(float r, float g, float b) const
 	glEnd();
 }
 
-void NavMeshNode::renderPathPointer(float r, float g, float b) const
+void NavMeshNode::renderPathPointer(float r, float g, float b, bool invert) const
 {
 	if (!pathPointer)
 		return;
 
 	float vecX = pathPointer->getX() - x;
 	float vecY = pathPointer->getY() - y;
+
+	if (invert)
+	{
+		vecX = -vecX;
+		vecY = -vecY;
+	}
 
 	float vecLength = sqrtf(vecX * vecX + vecY * vecY);
 	vecX /= vecLength;
@@ -82,12 +103,22 @@ void NavMeshNode::renderPathPointer(float r, float g, float b) const
 	float fromX = x + vecX * vecLength - vecX * PATH_POINTER_ARROW_LENGTH;
 	float fromY = y + vecY * vecLength - vecY * PATH_POINTER_ARROW_LENGTH;
 
+	if (invert)
+	{
+		fromX = pathPointer->getX() + vecX * vecLength - vecX * PATH_POINTER_ARROW_LENGTH;
+		fromY = pathPointer->getY() + vecY * vecLength - vecY * PATH_POINTER_ARROW_LENGTH;
+	}
+
 	glColor3f(r, g, b);
 	glLineWidth(PATH_POINTER_WIDTH);
 
 	glBegin(GL_LINES);
 
-	glVertex2f(x, y);
+	if (!invert)
+		glVertex2f(x, y);
+	else
+		glVertex2f(pathPointer->getX(), pathPointer->getY());
+
 	glVertex2f(fromX, fromY);
 
 	glVertex2f(fromX, fromY);

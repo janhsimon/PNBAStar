@@ -7,6 +7,7 @@ const float NavMesh::SELECTION_RADIUS = 20.0f;
 NavMesh::NavMesh()
 {
 	selectedNode = startNode = goalNode = nullptr;
+	showFinalPathOnly = true;
 }
 
 void NavMesh::addNode(NavMeshNode *node)
@@ -106,7 +107,10 @@ void NavMesh::resetPathPointers()
 void NavMesh::render()
 {
 	for (NavMeshNode *node : nodes)
+	{
 		node->renderConnections(0.0f, 0.0f, 0.0f);
+		node->renderLine(0.0f, 0.0f, 1.0f);
+	}
 
 	for (NavMeshNode *node : nodes)
 	{
@@ -124,6 +128,20 @@ void NavMesh::render()
 		else
 			node->renderNormalNode(r, g, b);
 
-		node->renderPathPointer(1.0f, 0.0f, 1.0f);
+		if (!showFinalPathOnly)
+			node->renderPathPointer(1.0f, 0.0f, 0.0f, false);
+		else
+			renderFinalPath(goalNode);
 	}
+}
+
+void NavMesh::renderFinalPath(NavMeshNode *node)
+{
+	if (!node)
+		return;
+
+	node->renderPathPointer(0.0f, 1.0f, 0.0f, true);
+
+	// recursion
+	renderFinalPath(node->getPathPointer());
 }
