@@ -7,7 +7,7 @@ const float NavMesh::SELECTION_RADIUS = 20.0f;
 NavMesh::NavMesh()
 {
 	selectedNode = startNode = goalNode = nullptr;
-	showFinalPathOnly = true;
+	showFinalPathOnly = false;
 }
 
 NavMesh::~NavMesh()
@@ -34,13 +34,11 @@ void NavMesh::deleteNode(NavMeshNode *node)
 			i = nodes.erase(i);
 		else
 		{
-			std::vector<NavMeshNode*> *adjacentNodes = (*i)->getAdjacentNodes();
-			assert(adjacentNodes);
-
-			for (std::vector<NavMeshNode*>::iterator j = adjacentNodes->begin(); j != adjacentNodes->end();)
+			std::vector<NavMeshNode*> adjacentNodes = *((*i)->getAdjacentNodes());
+			for (std::vector<NavMeshNode*>::iterator j = adjacentNodes.begin(); j != adjacentNodes.end();)
 			{
 				if (*j == node)
-					j = adjacentNodes->erase(j);
+					j = adjacentNodes.erase(j);
 				else
 					++j;
 			}
@@ -63,6 +61,17 @@ void NavMesh::deleteSelectedNode()
 {
 	if (selectedNode)
 		deleteNode(selectedNode);
+}
+
+void NavMesh::deleteNodeConnections(NavMeshNode *node)
+{
+	assert(node);
+	std::vector<NavMeshNode*> adjacentNodes = (*node->getAdjacentNodes());
+	for (NavMeshNode *adjacentNode : adjacentNodes)
+	{
+		adjacentNode->removeAdjacentNode(node);
+		node->removeAdjacentNode(adjacentNode);
+	}
 }
 
 void NavMesh::selectNodeClosestTo(const wxPoint &point)

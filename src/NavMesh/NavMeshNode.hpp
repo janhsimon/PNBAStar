@@ -12,7 +12,8 @@ public:
 	inline void setPosition(float x, float y) { this->x = x; this->y = y; }
 
 	inline std::vector<NavMeshNode*> *getAdjacentNodes() { return &adjacentNodes; }
-	inline void addAdjacentNode(NavMeshNode *node) { adjacentNodes.push_back(node); }
+	inline void addAdjacentNode(NavMeshNode *node) { assert(node); adjacentNodes.push_back(node); }
+	void removeAdjacentNode(NavMeshNode *node);
 
 	inline float getForwardCost() const { return forwardCost; }
 	inline float getBackwardsCost() const { return backwardsCost; }

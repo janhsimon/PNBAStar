@@ -63,6 +63,9 @@
     <ClCompile Include="src\Pathfinder\AStarPathfinder.cpp">
       <Filter>Source Files\Pathfinder</Filter>
     </ClCompile>
+    <ClCompile Include="src\Pathfinder\IPathfinder.cpp">
+      <Filter>Source Files\Pathfinder</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.hpp">

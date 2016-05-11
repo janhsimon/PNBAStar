@@ -25,12 +25,16 @@ private:
 	wxRadioBox *toolRadioBox, *pathfinderRadioBox, *pathDisplayRadioBox;
 	wxPanel *buttonPanel;
 	wxBoxSizer *buttonPanelLayout;
-	wxButton *findPathButton, *resetPathButton;
+	wxStaticText *pathfinderStateLabel;
+	wxButton *calculateStepButton, *calculatePathButton, *resetPathButton;
+
+	void updatePathfinderControls();
 
 	void toolRadioBoxEvent(wxCommandEvent &event);
 	void pathfinderRadioBoxEvent(wxCommandEvent &event);
 	void pathDisplayRadioBoxEvent(wxCommandEvent &event);
-	void findPathButtonEvent(wxCommandEvent&);
+	void calculateStepButtonEvent(wxCommandEvent&);
+	void calculatePathButtonEvent(wxCommandEvent&);
 	void resetPathButtonEvent(wxCommandEvent&);
 
 	DECLARE_EVENT_TABLE()

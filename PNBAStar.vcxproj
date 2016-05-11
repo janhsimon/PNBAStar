@@ -17,6 +17,7 @@
     <ClCompile Include="src\NavMesh\NavMesh.cpp" />
     <ClCompile Include="src\NavMesh\NavMeshNode.cpp" />
     <ClCompile Include="src\Pathfinder\AStarPathfinder.cpp" />
+    <ClCompile Include="src\Pathfinder\IPathfinder.cpp" />
     <ClCompile Include="src\SideBar.cpp" />
     <ClCompile Include="src\Tool\ConnectNodeTool.cpp" />
     <ClCompile Include="src\Tool\EditNodeTool.cpp" />

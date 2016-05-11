@@ -9,10 +9,13 @@ class AStarPathfinder : public IPathfinder
 public:
 	AStarPathfinder(NavMesh *navMesh);
 
-	void findPath();
+	void reset();
+	void calculateStep();
+	void calculatePath();
 
 private:
 	std::vector<NavMeshNode*> openList, closedList;
+	NavMeshNode *currentNode, *startNode, *goalNode;
 
 	NavMeshNode *getLowestTotalCostNodeOnOpenList() const;
 	void closeNode(NavMeshNode *node);

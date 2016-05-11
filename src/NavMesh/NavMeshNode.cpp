@@ -15,6 +15,17 @@ NavMeshNode::NavMeshNode(const wxPoint &point)
 	lineEnable = false;
 }
 
+void NavMeshNode::removeAdjacentNode(NavMeshNode *node)
+{
+	for (std::vector<NavMeshNode*>::iterator i = adjacentNodes.begin(); i != adjacentNodes.end();)
+	{
+		if (*i == node)
+			i = adjacentNodes.erase(i);
+		else
+			++i;
+	}
+}
+
 void NavMeshNode::renderLineTo(float x, float y, float r, float g, float b) const
 {
 	glColor3f(r, g, b);

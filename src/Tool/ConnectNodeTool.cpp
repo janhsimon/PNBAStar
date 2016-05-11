@@ -46,11 +46,7 @@ void ConnectNodeTool::rightMouseButtonUpEvent(wxMouseEvent &event)
 		NavMeshNode *mouseNode = navMesh->getSelectedNode();
 
 		if (mouseNode)
-		{
-			// TODO: delete all adjacencies of selected node
-			//assert(navMesh);
-			//navMesh->deleteSelectedNode();
-		}
+			navMesh->deleteNodeConnections(mouseNode);
 	}
 }
 

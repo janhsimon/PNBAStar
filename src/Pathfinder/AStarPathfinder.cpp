@@ -4,7 +4,7 @@
 
 AStarPathfinder::AStarPathfinder(NavMesh *navMesh) : IPathfinder(navMesh)
 {
-
+	currentNode = startNode = goalNode = nullptr;
 }
 
 NavMeshNode *AStarPathfinder::getLowestTotalCostNodeOnOpenList() const
@@ -64,59 +64,63 @@ bool AStarPathfinder::isNodeOnOpenList(NavMeshNode *node)
 	return false;
 }
 
-void AStarPathfinder::findPath()
+void AStarPathfinder::reset()
 {
-	assert(navMesh);
-
-	NavMeshNode *startNode = navMesh->getStartNode();
-
-	if (!startNode)
-	{
-		wxMessageBox("The nav mesh has no start node.", "Error", wxICON_ERROR);
-		return;
-	}
-
-	NavMeshNode *goalNode = navMesh->getGoalNode();
-
-	if (!goalNode)
-	{
-		wxMessageBox("The nav mesh has no goal node.", "Error", wxICON_ERROR);
-		return;
-	}
-
 	openList.clear();
 	closedList.clear();
 
+	assert(navMesh);
 	navMesh->resetPathPointers();
 
-	
-	// step 0
-	
-	openList.push_back(startNode);
+	state = NotInitialized;
+}
 
-
-	// step 1
-	
-	NavMeshNode *i = getLowestTotalCostNodeOnOpenList();
-
-	while (i)
+void AStarPathfinder::calculateStep()
+{
+	if (state == NotInitialized)
 	{
-		// step 2
+		reset();
 
-		if (i == goalNode)
+		startNode = navMesh->getStartNode();
+
+		if (!startNode)
+		{
+			wxMessageBox("The nav mesh has no start node.", "Error", wxICON_ERROR);
+			state = Failed;
 			return;
+		}
 
+		goalNode = navMesh->getGoalNode();
 
-		// step 3
-	
-		closeNode(i);
+		if (!goalNode)
+		{
+			wxMessageBox("The nav mesh has no goal node.", "Error", wxICON_ERROR);
+			state = Failed;
+			return;
+		}
 
+		openList.push_back(startNode);
 
-		// step 4
+		currentNode = startNode;
 
-		std::vector<NavMeshNode*> *adjacentNodes = i->getAdjacentNodes();
-		assert(adjacentNodes);
-		for (std::vector<NavMeshNode*>::iterator j = adjacentNodes->begin(); j != adjacentNodes->end(); ++j)
+		state = Running;
+	}
+	else if (state == Running)
+	{
+		assert(currentNode);
+		assert(startNode);
+		assert(goalNode);
+
+		if (currentNode == goalNode)
+		{
+			state = Done;
+			return;
+		}
+
+		closeNode(currentNode);
+
+		std::vector<NavMeshNode*> adjacentNodes = *(currentNode->getAdjacentNodes());
+		for (std::vector<NavMeshNode*>::iterator j = adjacentNodes.begin(); j != adjacentNodes.end(); ++j)
 		{
 			if (isNodeOnClosedList(*j))
 				continue;
@@ -125,26 +129,33 @@ void AStarPathfinder::findPath()
 			{
 				openList.push_back(*j);
 				(*j)->setForwardCost(navMesh->calculateDistanceBetweenNodes(*j, goalNode));
-				(*j)->setBackwardsCost(i->getBackwardsCost() + navMesh->calculateDistanceBetweenNodes(i, *j));
+				(*j)->setBackwardsCost(currentNode->getBackwardsCost() + navMesh->calculateDistanceBetweenNodes(currentNode, *j));
 				(*j)->updateTotalCost();
-				(*j)->setPathPointer(i);
+				(*j)->setPathPointer(currentNode);
 			}
 			else
 			{
 				float currentBackwardsCost = (*j)->getBackwardsCost();
-				float newBackwardsCost = i->getBackwardsCost() + navMesh->calculateDistanceBetweenNodes(i, *j);
+				float newBackwardsCost = currentNode->getBackwardsCost() + navMesh->calculateDistanceBetweenNodes(currentNode, *j);
 
 				if (newBackwardsCost < currentBackwardsCost)
 				{
-					(*j)->setPathPointer(i);
+					(*j)->setPathPointer(currentNode);
 					(*j)->setBackwardsCost(newBackwardsCost);
 					(*j)->updateTotalCost();
 				}
 			}
 		}
 
-		i = getLowestTotalCostNodeOnOpenList();
-	}
+		currentNode = getLowestTotalCostNodeOnOpenList();
 
-	wxMessageBox("No path between start and goal node found.", "Info", wxICON_INFORMATION);
+		if (!currentNode)
+			state = Failed;
+	}
+}
+
+void AStarPathfinder::calculatePath()
+{
+	while (state != Done && state != Failed)
+		calculateStep();
 }

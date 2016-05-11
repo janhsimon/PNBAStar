@@ -15,8 +15,7 @@ class NavMesh
 		void addNode(NavMeshNode *node);
 		void deleteNode(NavMeshNode *node);
 		void deleteSelectedNode();
-
-		inline std::vector<NavMeshNode*> *getNodes() { return &nodes; }
+		void deleteNodeConnections(NavMeshNode *node);
 
 		inline NavMeshNode *getSelectedNode() const { return selectedNode; }
 		inline void setSelectedNode(NavMeshNode *selectedNode) { this->selectedNode = selectedNode; }

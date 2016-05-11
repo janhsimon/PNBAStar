@@ -49,6 +49,7 @@ bool Application::OnInit()
 	layout->Add(drawPane, 1, wxEXPAND | wxALL, 10);
 	layout->Add(sideBar, 0, wxEXPAND, 0);
 
+	mainFrame->SetMinSize(wxSize(800, 600));
 	mainFrame->Maximize();
 	mainFrame->Show();
 

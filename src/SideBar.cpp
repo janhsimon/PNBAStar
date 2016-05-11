@@ -8,8 +8,9 @@ BEGIN_EVENT_TABLE(SideBar, wxPanel)
 	EVT_RADIOBOX(0, SideBar::toolRadioBoxEvent)
 	EVT_RADIOBOX(1, SideBar::pathfinderRadioBoxEvent)
 	EVT_RADIOBOX(2, SideBar::pathDisplayRadioBoxEvent)
-	EVT_BUTTON(0, SideBar::findPathButtonEvent)
-	EVT_BUTTON(1, SideBar::resetPathButtonEvent)
+	EVT_BUTTON(0, SideBar::calculateStepButtonEvent)
+	EVT_BUTTON(1, SideBar::calculatePathButtonEvent)
+	EVT_BUTTON(2, SideBar::resetPathButtonEvent)
 END_EVENT_TABLE()
 
 SideBar::SideBar(wxWindow *parent) : wxPanel(parent)
@@ -33,8 +34,8 @@ SideBar::SideBar(wxWindow *parent) : wxPanel(parent)
 	layout->Add(pathfinderRadioBox, 0, wxEXPAND | wxALL, 10);
 
 	wxArrayString pathDisplayNames;
-	pathDisplayNames.Add("Final path only");
 	pathDisplayNames.Add("All path pointers");
+	pathDisplayNames.Add("Final path only");
 	pathDisplayRadioBox = new wxRadioBox(this, 2, "Show:", wxDefaultPosition, wxDefaultSize, pathDisplayNames, 1, wxRA_SPECIFY_COLS);
 	layout->Add(pathDisplayRadioBox, 0, wxEXPAND | wxALL, 10);
 
@@ -43,10 +44,16 @@ SideBar::SideBar(wxWindow *parent) : wxPanel(parent)
 	buttonPanel->SetSizer(buttonPanelLayout);
 	layout->Add(buttonPanel, 0, wxEXPAND | wxALL, 10);
 
-	findPathButton = new wxButton(buttonPanel, 0, "Find Path");
-	buttonPanelLayout->Add(findPathButton, 0, wxEXPAND);
+	pathfinderStateLabel = new wxStaticText(buttonPanel, 0, "");
+	buttonPanelLayout->Add(pathfinderStateLabel, 0, wxEXPAND);
 
-	resetPathButton = new wxButton(buttonPanel, 1, "Reset Path");
+	calculateStepButton = new wxButton(buttonPanel, 0, ">");
+	buttonPanelLayout->Add(calculateStepButton, 0, wxEXPAND);
+
+	calculatePathButton = new wxButton(buttonPanel, 1, ">>");
+	buttonPanelLayout->Add(calculatePathButton, 0, wxEXPAND);
+
+	resetPathButton = new wxButton(buttonPanel, 2, "<<");
 	buttonPanelLayout->Add(resetPathButton, 0, wxEXPAND);
 
 	navMesh = new NavMesh;
@@ -54,6 +61,8 @@ SideBar::SideBar(wxWindow *parent) : wxPanel(parent)
 	assert(navMesh);
 	selectedTool = new EditNodeTool(navMesh);
 	selectedPathfinder = new AStarPathfinder(navMesh);
+
+	updatePathfinderControls();
 }
 
 SideBar::~SideBar()
@@ -61,6 +70,35 @@ SideBar::~SideBar()
 	delete navMesh;
 	delete selectedTool;
 	delete selectedPathfinder;
+}
+
+void SideBar::updatePathfinderControls()
+{
+	assert(selectedPathfinder);
+	assert(pathfinderStateLabel);
+	pathfinderStateLabel->SetLabelText("State: " + selectedPathfinder->getStateString());
+
+	assert(calculateStepButton);
+	assert(calculatePathButton);
+	assert(resetPathButton);
+	if (selectedPathfinder->getState() == NotInitialized)
+	{
+		calculateStepButton->Enable(true);
+		calculatePathButton->Enable(true);
+		resetPathButton->Enable(false);
+	}
+	else if ( selectedPathfinder->getState() == Running)
+	{
+		calculateStepButton->Enable(true);
+		calculatePathButton->Enable(true);
+		resetPathButton->Enable(true);
+	}
+	else if (selectedPathfinder->getState() == Done || selectedPathfinder->getState() == Failed)
+	{
+		calculateStepButton->Enable(false);
+		calculatePathButton->Enable(false);
+		resetPathButton->Enable(true);
+	}
 }
 
 void SideBar::toolRadioBoxEvent(wxCommandEvent &event)
@@ -110,17 +148,26 @@ void SideBar::pathfinderRadioBoxEvent(wxCommandEvent &event)
 void SideBar::pathDisplayRadioBoxEvent(wxCommandEvent &event)
 {
 	assert(navMesh);
-	navMesh->setShowFinalPathOnly(event.GetSelection() == 0);
+	navMesh->setShowFinalPathOnly(event.GetSelection() == 1);
 }
 
-void SideBar::findPathButtonEvent(wxCommandEvent&)
+void SideBar::calculateStepButtonEvent(wxCommandEvent&)
 {
 	assert(selectedPathfinder);
-	selectedPathfinder->findPath();
+	selectedPathfinder->calculateStep();
+	updatePathfinderControls();
+}
+
+void SideBar::calculatePathButtonEvent(wxCommandEvent&)
+{
+	assert(selectedPathfinder);
+	selectedPathfinder->calculatePath();
+	updatePathfinderControls();
 }
 
 void SideBar::resetPathButtonEvent(wxCommandEvent&)
 {
-	assert(navMesh);
-	navMesh->resetPathPointers();
+	assert(selectedPathfinder);
+	selectedPathfinder->reset();
+	updatePathfinderControls();
 }
