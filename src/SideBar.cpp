@@ -16,44 +16,59 @@ SideBar::SideBar(wxWindow *parent) : wxPanel(parent)
 {
 	SetMinSize(wxSize(150, 0));
 
-	wxBoxSizer *layout = new wxBoxSizer(wxVERTICAL);
+	layout = new wxBoxSizer(wxVERTICAL);
 	SetSizer(layout);
 	
 	wxArrayString toolNames;
 	toolNames.Add("Nodes");
 	toolNames.Add("Connections");
 	toolNames.Add("Start/Goal");
-	wxRadioBox *toolRadioBox = new wxRadioBox(this, 0, "Edit:", wxDefaultPosition, wxDefaultSize, toolNames, 1, wxRA_SPECIFY_COLS);
+	toolRadioBox = new wxRadioBox(this, 0, "Edit:", wxDefaultPosition, wxDefaultSize, toolNames, 1, wxRA_SPECIFY_COLS);
 	layout->Add(toolRadioBox, 0, wxEXPAND | wxALL, 10);
 
 	wxArrayString pathfinderNames;
 	pathfinderNames.Add("A* (serial)");
 	pathfinderNames.Add("PNBA* (parallel)");
-	wxRadioBox *pathfinderRadioBox = new wxRadioBox(this, 1, "Pathfinder:", wxDefaultPosition, wxDefaultSize, pathfinderNames, 1, wxRA_SPECIFY_COLS);
+	pathfinderRadioBox = new wxRadioBox(this, 1, "Pathfinder:", wxDefaultPosition, wxDefaultSize, pathfinderNames, 1, wxRA_SPECIFY_COLS);
 	layout->Add(pathfinderRadioBox, 0, wxEXPAND | wxALL, 10);
 
 	wxArrayString pathDisplayNames;
 	pathDisplayNames.Add("Final path only");
 	pathDisplayNames.Add("All path pointers");
-	wxRadioBox *pathDisplayRadioBox = new wxRadioBox(this, 2, "Show:", wxDefaultPosition, wxDefaultSize, pathDisplayNames, 1, wxRA_SPECIFY_COLS);
+	pathDisplayRadioBox = new wxRadioBox(this, 2, "Show:", wxDefaultPosition, wxDefaultSize, pathDisplayNames, 1, wxRA_SPECIFY_COLS);
 	layout->Add(pathDisplayRadioBox, 0, wxEXPAND | wxALL, 10);
 
-	wxPanel *buttonPanel = new wxPanel(this);
-	wxBoxSizer *buttonPanelLayout = new wxBoxSizer(wxVERTICAL);
+	buttonPanel = new wxPanel(this);
+	buttonPanelLayout = new wxBoxSizer(wxVERTICAL);
 	buttonPanel->SetSizer(buttonPanelLayout);
 	layout->Add(buttonPanel, 0, wxEXPAND | wxALL, 10);
 
-	wxButton *findPathButton = new wxButton(buttonPanel, 0, "Find Path");
+	findPathButton = new wxButton(buttonPanel, 0, "Find Path");
 	buttonPanelLayout->Add(findPathButton, 0, wxEXPAND);
 
-	wxButton *resetPathButton = new wxButton(buttonPanel, 1, "Reset Path");
+	resetPathButton = new wxButton(buttonPanel, 1, "Reset Path");
 	buttonPanelLayout->Add(resetPathButton, 0, wxEXPAND);
 
-	navMesh = new NavMesh();
+	navMesh = new NavMesh;
 
 	assert(navMesh);
 	selectedTool = new EditNodeTool(navMesh);
 	selectedPathfinder = new AStarPathfinder(navMesh);
+}
+
+SideBar::~SideBar()
+{
+	delete layout;
+	delete toolRadioBox;
+	delete pathfinderRadioBox;
+	delete pathDisplayRadioBox;
+	delete buttonPanel;
+	delete buttonPanelLayout;
+	delete findPathButton;
+	delete resetPathButton;
+	delete navMesh;
+	delete selectedTool;
+	delete selectedPathfinder;
 }
 
 void SideBar::toolRadioBoxEvent(wxCommandEvent &event)

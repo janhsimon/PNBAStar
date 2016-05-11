@@ -10,7 +10,8 @@ class DrawPane : public wxGLCanvas
 {
 public:
 	DrawPane(wxWindow *parent, SideBar *sideBar, NavMesh *navMesh);
-	
+	~DrawPane();
+
 	void paintEvent(wxPaintEvent&);
 	
 	void leftMouseButtonDownEvent(wxMouseEvent &event);

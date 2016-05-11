@@ -10,12 +10,15 @@ class Application : public wxApp
 {
 public:
 	bool OnInit();
+	int OnExit();
 	void idleEvent(wxIdleEvent &event);
 
 private:
 	MainFrame *mainFrame;
 	SideBar *sideBar;
 	DrawPane *drawPane;
+
+	wxBoxSizer *layout;
 
 	DECLARE_EVENT_TABLE()
 };

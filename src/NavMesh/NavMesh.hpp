@@ -10,6 +10,7 @@ class NavMesh
 {
 	public:
 		NavMesh();
+		~NavMesh();
 
 		void addNode(NavMeshNode *node);
 		void deleteNode(NavMeshNode *node);

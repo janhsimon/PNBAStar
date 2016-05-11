@@ -28,6 +28,12 @@ DrawPane::DrawPane(wxWindow *parent, SideBar *sideBar, NavMesh *navMesh) : wxGLC
 	SetToolTip(nodeInfoToolTip);
 }
 
+DrawPane::~DrawPane()
+{
+	delete glContext;
+	delete nodeInfoToolTip;
+}
+
 void DrawPane::paintEvent(wxPaintEvent&)
 {
 	render();

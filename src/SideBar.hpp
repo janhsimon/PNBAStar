@@ -10,6 +10,7 @@ class SideBar : public wxPanel
 {
 public:
 	SideBar(wxWindow *parent);
+	~SideBar();
 
 	inline NavMesh *getNavMesh() const { return navMesh; }
 	inline ITool *getSelectedTool() const { return selectedTool; }
@@ -19,6 +20,12 @@ private:
 	NavMesh *navMesh;
 	ITool *selectedTool;
 	IPathfinder *selectedPathfinder;
+
+	wxBoxSizer *layout;
+	wxRadioBox *toolRadioBox, *pathfinderRadioBox, *pathDisplayRadioBox;
+	wxPanel *buttonPanel;
+	wxBoxSizer *buttonPanelLayout;
+	wxButton *findPathButton, *resetPathButton;
 
 	void toolRadioBoxEvent(wxCommandEvent &event);
 	void pathfinderRadioBoxEvent(wxCommandEvent &event);

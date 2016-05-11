@@ -37,7 +37,7 @@ bool Application::OnInit()
 {
 	mainFrame = new MainFrame("PNBA* -- written by Jan Simon", wxDefaultPosition, wxDefaultSize);
 	
-	wxBoxSizer *layout = new wxBoxSizer(wxHORIZONTAL);
+	layout = new wxBoxSizer(wxHORIZONTAL);
 	mainFrame->SetSizer(layout);
 
 	sideBar = new SideBar(mainFrame);
@@ -53,6 +53,14 @@ bool Application::OnInit()
 	mainFrame->Show();
 
 	return true;
+}
+
+int Application::OnExit()
+{
+	delete mainFrame;
+	delete layout;
+	delete sideBar;
+	delete drawPane;
 }
 
 void Application::idleEvent(wxIdleEvent &event)

@@ -10,6 +10,14 @@ NavMesh::NavMesh()
 	showFinalPathOnly = true;
 }
 
+NavMesh::~NavMesh()
+{
+	for (NavMeshNode *node : nodes)
+		delete node;
+	
+	nodes.clear();
+}
+
 void NavMesh::addNode(NavMeshNode *node)
 {
 	assert(node);

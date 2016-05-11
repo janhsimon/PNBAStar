@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\NavMesh">
+      <UniqueIdentifier>{c1796480-adee-4e94-8414-c9a8d1c653d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Tool">
+      <UniqueIdentifier>{1fbdb3ae-7edc-4faf-9998-ac56533c01a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NavMesh">
+      <UniqueIdentifier>{2b4ac77c-b186-4eb8-9bca-fe1909dec821}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tool">
+      <UniqueIdentifier>{a6f5d252-39af-4b18-955c-ffc4f5132837}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Pathfinder">
+      <UniqueIdentifier>{e3f1050c-fb8e-4dcb-87be-b28f43e39d37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Pathfinder">
+      <UniqueIdentifier>{2eebfee7-d9af-4730-b925-ea7a3423f4ff}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MainFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DrawPane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SideBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NavMesh\NavMesh.cpp">
+      <Filter>Source Files\NavMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NavMesh\NavMeshNode.cpp">
+      <Filter>Source Files\NavMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tool\ConnectNodeTool.cpp">
+      <Filter>Source Files\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tool\EditNodeTool.cpp">
+      <Filter>Source Files\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tool\SetStartGoalTool.cpp">
+      <Filter>Source Files\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Pathfinder\AStarPathfinder.cpp">
+      <Filter>Source Files\Pathfinder</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Application.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MainFrame.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DrawPane.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SideBar.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\NavMesh\NavMesh.hpp">
+      <Filter>Header Files\NavMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\NavMesh\NavMeshNode.hpp">
+      <Filter>Header Files\NavMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tool\ConnectNodeTool.hpp">
+      <Filter>Header Files\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tool\EditNodeTool.hpp">
+      <Filter>Header Files\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tool\ITool.hpp">
+      <Filter>Header Files\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tool\SetStartGoalTool.hpp">
+      <Filter>Header Files\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Pathfinder\IPathfinder.hpp">
+      <Filter>Header Files\Pathfinder</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Pathfinder\AStarPathfinder.hpp">
+      <Filter>Header Files\Pathfinder</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
