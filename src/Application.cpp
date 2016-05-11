@@ -55,14 +55,6 @@ bool Application::OnInit()
 	return true;
 }
 
-int Application::OnExit()
-{
-	delete mainFrame;
-	delete layout;
-	delete sideBar;
-	delete drawPane;
-}
-
 void Application::idleEvent(wxIdleEvent &event)
 {
 	drawPane->render();

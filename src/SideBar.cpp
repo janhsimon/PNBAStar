@@ -58,14 +58,6 @@ SideBar::SideBar(wxWindow *parent) : wxPanel(parent)
 
 SideBar::~SideBar()
 {
-	delete layout;
-	delete toolRadioBox;
-	delete pathfinderRadioBox;
-	delete pathDisplayRadioBox;
-	delete buttonPanel;
-	delete buttonPanelLayout;
-	delete findPathButton;
-	delete resetPathButton;
 	delete navMesh;
 	delete selectedTool;
 	delete selectedPathfinder;

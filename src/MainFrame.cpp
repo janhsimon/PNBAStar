@@ -32,9 +32,7 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 
 MainFrame::~MainFrame()
 {
-	delete menuFile;
-	delete menuHelp;
-	delete menuBar;
+	
 }
 
 void MainFrame::OnHello(wxCommandEvent &event)

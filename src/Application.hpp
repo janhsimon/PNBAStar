@@ -10,7 +10,6 @@ class Application : public wxApp
 {
 public:
 	bool OnInit();
-	int OnExit();
 	void idleEvent(wxIdleEvent &event);
 
 private:
