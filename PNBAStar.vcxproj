@@ -18,6 +18,9 @@
     <ClCompile Include="src\NavMesh\NavMeshNode.cpp" />
     <ClCompile Include="src\Pathfinder\AStarPathfinder.cpp" />
     <ClCompile Include="src\Pathfinder\IPathfinder.cpp" />
+    <ClCompile Include="src\Pathfinder\PNBAStarPathfinder.cpp" />
+    <ClCompile Include="src\Pathfinder\PNBAStarPathfinderRootTask.cpp" />
+    <ClCompile Include="src\Pathfinder\PNBAStarPathfinderTask.cpp" />
     <ClCompile Include="src\SideBar.cpp" />
     <ClCompile Include="src\Tool\ConnectNodeTool.cpp" />
     <ClCompile Include="src\Tool\EditNodeTool.cpp" />
@@ -31,6 +34,10 @@
     <ClInclude Include="src\NavMesh\NavMeshNode.hpp" />
     <ClInclude Include="src\Pathfinder\AStarPathfinder.hpp" />
     <ClInclude Include="src\Pathfinder\IPathfinder.hpp" />
+    <ClInclude Include="src\Pathfinder\PNBASharedData.hpp" />
+    <ClInclude Include="src\Pathfinder\PNBAStarPathfinder.hpp" />
+    <ClInclude Include="src\Pathfinder\PNBAStarPathfinderRootTask.hpp" />
+    <ClInclude Include="src\Pathfinder\PNBAStarPathfinderTask.hpp" />
     <ClInclude Include="src\SideBar.hpp" />
     <ClInclude Include="src\Tool\ConnectNodeTool.hpp" />
     <ClInclude Include="src\Tool\EditNodeTool.hpp" />

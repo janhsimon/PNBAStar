@@ -1,5 +1,6 @@
 #include "SideBar.hpp"
 #include "Pathfinder/AStarPathfinder.hpp"
+#include "Pathfinder/PNBAStarPathfinder.hpp"
 #include "Tool/ConnectNodeTool.hpp"
 #include "Tool/EditNodeTool.hpp"
 #include "Tool/SetStartGoalTool.hpp"
@@ -142,6 +143,14 @@ void SideBar::pathfinderRadioBoxEvent(wxCommandEvent &event)
 
 		assert(navMesh);
 		selectedPathfinder = new AStarPathfinder(navMesh);
+	}
+	else if (selection == 1)
+	{
+		if (selectedPathfinder)
+			delete selectedPathfinder;
+
+		assert(navMesh);
+		selectedPathfinder = new PNBAStarPathfinder(navMesh);
 	}
 }
 

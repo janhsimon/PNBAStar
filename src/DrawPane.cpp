@@ -1,4 +1,3 @@
-#include <cassert>
 #include <sstream>
 
 #include "DrawPane.hpp"

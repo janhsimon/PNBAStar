@@ -9,8 +9,6 @@ AStarPathfinder::AStarPathfinder(NavMesh *navMesh) : IPathfinder(navMesh)
 
 NavMeshNode *AStarPathfinder::getLowestTotalCostNodeOnOpenList() const
 {
-	assert(navMesh);
-
 	NavMeshNode *lowestCostNode = nullptr;
 	float lowestTotalCost;
 	for (NavMeshNode *node : openList)

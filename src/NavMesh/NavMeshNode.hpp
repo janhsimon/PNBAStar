@@ -2,6 +2,8 @@
 
 #include <vector>
 
+#include <wx/wx.h>
+
 class NavMeshNode
 {
 public:

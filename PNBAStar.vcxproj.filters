@@ -66,6 +66,15 @@
     <ClCompile Include="src\Pathfinder\IPathfinder.cpp">
       <Filter>Source Files\Pathfinder</Filter>
     </ClCompile>
+    <ClCompile Include="src\Pathfinder\PNBAStarPathfinder.cpp">
+      <Filter>Source Files\Pathfinder</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Pathfinder\PNBAStarPathfinderTask.cpp">
+      <Filter>Source Files\Pathfinder</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Pathfinder\PNBAStarPathfinderRootTask.cpp">
+      <Filter>Source Files\Pathfinder</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.hpp">
@@ -102,6 +111,18 @@
       <Filter>Header Files\Pathfinder</Filter>
     </ClInclude>
     <ClInclude Include="src\Pathfinder\AStarPathfinder.hpp">
+      <Filter>Header Files\Pathfinder</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Pathfinder\PNBAStarPathfinder.hpp">
+      <Filter>Header Files\Pathfinder</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Pathfinder\PNBAStarPathfinderTask.hpp">
+      <Filter>Header Files\Pathfinder</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Pathfinder\PNBASharedData.hpp">
+      <Filter>Header Files\Pathfinder</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Pathfinder\PNBAStarPathfinderRootTask.hpp">
       <Filter>Header Files\Pathfinder</Filter>
     </ClInclude>
   </ItemGroup>
