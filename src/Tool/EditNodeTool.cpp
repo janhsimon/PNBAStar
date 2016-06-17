@@ -37,7 +37,14 @@ void EditNodeTool::rightMouseButtonUpEvent(wxMouseEvent &event)
 	assert(navMesh);
 	
 	if (!event.LeftIsDown())
-		navMesh->deleteSelectedNode();
+	{
+		NavMeshNode *mouseNode = navMesh->getSelectedNode();
+
+		if (mouseNode)
+			navMesh->deleteNodeConnections(mouseNode);
+
+		navMesh->deleteNode(mouseNode);
+	}
 	else if (draggingNode)
 		navMesh->deleteNode(draggingNode);
 }

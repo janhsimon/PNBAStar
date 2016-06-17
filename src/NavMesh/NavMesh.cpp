@@ -66,7 +66,7 @@ void NavMesh::deleteSelectedNode()
 void NavMesh::deleteNodeConnections(NavMeshNode *node)
 {
 	assert(node);
-	std::vector<NavMeshNode*> adjacentNodes = (*node->getAdjacentNodes());
+	std::vector<NavMeshNode*> adjacentNodes = *(node->getAdjacentNodes());
 	for (NavMeshNode *adjacentNode : adjacentNodes)
 	{
 		adjacentNode->removeAdjacentNode(node);

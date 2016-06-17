@@ -10,6 +10,8 @@ void PNBAStarPathfinder::reset()
 {
 	assert(navMesh);
 	navMesh->resetPathPointers();
+
+	state = NotInitialized;
 }
 
 void PNBAStarPathfinder::calculateStep()
@@ -59,4 +61,5 @@ void PNBAStarPathfinder::calculatePath()
 
 	PNBAStarPathfinderRootTask *rootTask = new (tbb::task::allocate_root()) PNBAStarPathfinderRootTask(&sharedData, navMesh, startNode, goalNode);
 	tbb::task::spawn_root_and_wait(*rootTask);
+	state = Done;
 }

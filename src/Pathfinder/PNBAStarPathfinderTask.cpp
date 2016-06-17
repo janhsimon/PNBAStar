@@ -78,6 +78,7 @@ tbb::task *PNBAStarPathfinderTask::execute()
 		NavMeshNode *x = getLowestTotalCostNodeOnOpenList();
 
 		if (!x)
+		// should never happen!
 		{
 			sharedData->finished = true;
 			break;
@@ -135,7 +136,10 @@ tbb::task *PNBAStarPathfinderTask::execute()
 			F = getLowestTotalCostNodeOnOpenList()->getTotalCost();
 		}
 		else
+		{
+			goalNode->setPathPointer(x);
 			sharedData->finished = true;
+		}
 	}
 
 	return NULL;
