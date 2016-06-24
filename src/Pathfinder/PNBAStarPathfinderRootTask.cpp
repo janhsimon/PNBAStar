@@ -22,8 +22,8 @@ tbb::task *PNBAStarPathfinderRootTask::execute()
 	assert(navMesh);
 	assert(startNode);
 	assert(goalNode);
-	PNBAStarPathfinderTask *t1 = new(allocate_child()) PNBAStarPathfinderTask(sharedData, navMesh, startNode, goalNode);
-	PNBAStarPathfinderTask *t2 = new(allocate_child()) PNBAStarPathfinderTask(sharedData, navMesh, goalNode, startNode);
+	PNBAStarPathfinderTask *t1 = new(allocate_child()) PNBAStarPathfinderTask(sharedData, navMesh, startNode, goalNode, 1);
+	PNBAStarPathfinderTask *t2 = new(allocate_child()) PNBAStarPathfinderTask(sharedData, navMesh, goalNode, startNode, 2);
 
 	t1->setOtherTask(t2);
 	t2->setOtherTask(t1);

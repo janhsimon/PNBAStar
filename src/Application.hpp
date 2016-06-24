@@ -2,6 +2,7 @@
 
 #include <wx/wx.h>
 
+#include "Console.hpp"
 #include "DrawPane.hpp"
 #include "MainFrame.hpp"
 #include "SideBar.hpp"
@@ -16,6 +17,7 @@ private:
 	MainFrame *mainFrame;
 	SideBar *sideBar;
 	DrawPane *drawPane;
+	Console *console;
 
 	wxBoxSizer *layout;
 

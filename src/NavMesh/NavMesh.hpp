@@ -41,6 +41,8 @@ class NavMesh
 
 		void render();
 
+		void dumpToLog() const;
+
 	private:
 		static const float SELECTION_RADIUS;
 

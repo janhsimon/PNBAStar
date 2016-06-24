@@ -1,3 +1,5 @@
+#include <sstream>
+
 #include <wx/glcanvas.h>
 
 #include "NavMeshNode.hpp"
@@ -10,7 +12,7 @@ const float NavMeshNode::PATH_POINTER_ARROW_LENGTH = 12.0f;
 NavMeshNode::NavMeshNode(const wxPoint &point)
 {
 	setPosition(point.x, point.y);
-	forwardCost = backwardsCost = totalCost = 0.0f;
+	fCost1 = fCost2 = gCost1 = gCost2 = hCost1 = hCost2 = 0.0f;
 	pathPointer = nullptr;
 	lineEnable = false;
 }
@@ -141,4 +143,18 @@ void NavMeshNode::renderPathPointer(float r, float g, float b, bool invert) cons
 	glEnd();
 
 	glLineWidth(1.0f);
+}
+
+void NavMeshNode::dumpToStringStream(std::stringstream &s) const
+{
+	s << "Node #" << id << " @ " << x << "/" << y << std::endl;
+	s << "\tAdjacent nodes: ";
+
+	for (NavMeshNode *adjacentNode : adjacentNodes)
+		s << ((adjacentNode == adjacentNodes[0]) ? "" : ", ") << adjacentNode->getID();
+
+	s << std::endl << "\tAssociated costs:" << std::endl;
+	s << "\t\tF cost (total):\t\t" << fCost1 << "\t\t" << fCost2 << std::endl;
+	s << "\t\tG cost (backwards):\t\t" << gCost1 << "\t\t" << gCost2 << std::endl;
+	s << "\t\tH cost (forward, heuristic):\t" << hCost1 << "\t\t" << hCost2 << std::endl;
 }

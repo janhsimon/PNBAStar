@@ -4,9 +4,20 @@
 
 #include "../NavMesh/NavMeshNode.hpp"
 
-struct PNBASharedData
+class PNBASharedData
 {
-	bool finished;
-	std::vector<NavMeshNode*> M;
-	float L;
+	private:
+		bool finished;
+		float L;
+
+	public:
+		std::vector<NavMeshNode*> M;
+
+		inline std::vector<NavMeshNode*> *getM() { return &M; }
+
+		inline bool getFinished() const { return finished; }
+		void setFinished(bool finished);
+
+		inline float getL() const { return L; }
+		void setL(float L);
 };

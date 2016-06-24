@@ -1,3 +1,5 @@
+#include <sstream>
+
 #include <wx/glcanvas.h>
 
 #include "NavMesh.hpp"
@@ -21,6 +23,7 @@ NavMesh::~NavMesh()
 void NavMesh::addNode(NavMeshNode *node)
 {
 	assert(node);
+	node->setID(nodes.size());
 	nodes.push_back(node);
 };
 
@@ -112,7 +115,7 @@ float NavMesh::calculateDistanceBetweenNodes(NavMeshNode *a, NavMeshNode *b) con
 {
 	float x = b->getX() - a->getX();
 	float y = b->getY() - a->getY();
-	return x * x + y * y;
+	return sqrtf(x * x + y * y);
 }
 
 void NavMesh::resetPathPointers()
@@ -161,4 +164,25 @@ void NavMesh::renderFinalPath(NavMeshNode *node)
 
 	// recursion
 	renderFinalPath(node->getPathPointer());
+}
+
+void NavMesh::dumpToLog() const
+{
+	std::stringstream s;
+
+	s << std::endl << "--------------------------------------------------------------------------------" << std::endl;
+	s << "NAV MESH DUMP" << std::endl;
+
+	unsigned int nodeCount = nodes.size();
+	s << nodeCount << " node";
+	if (nodeCount != 1) s << "(s)";
+	s << " total" << std::endl;
+	s << "--------------------------------------------------------------------------------" << std::endl;
+
+	for (NavMeshNode *node : nodes)
+		node->dumpToStringStream(s);
+
+	s << "--------------------------------------------------------------------------------";
+
+	wxLogMessage(s.str().c_str());
 }

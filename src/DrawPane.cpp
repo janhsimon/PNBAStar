@@ -84,9 +84,10 @@ void DrawPane::mouseMotionEvent(wxMouseEvent &event)
 		nodeInfoToolTip->Enable(true);
 		
 		std::stringstream s;
-		s << "Forward Cost: " << selectedNode->getForwardCost() << std::endl;
-		s << "Backwards Cost: " << selectedNode->getBackwardsCost() << std::endl;
-		s << "Total Cost: " << selectedNode->getTotalCost();
+		//s << "Forward Cost: " << selectedNode->getForwardCost() << std::endl;
+		//s << "Backwards Cost: " << selectedNode->getBackwardsCost() << std::endl;
+		///s << "Total Cost: " << selectedNode->getTotalCost();
+		s << "ID: " << selectedNode->getID();
 		nodeInfoToolTip->SetTip(s.str());
 	}
 	else

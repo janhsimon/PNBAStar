@@ -13,12 +13,14 @@ NavMeshNode *AStarPathfinder::getLowestTotalCostNodeOnOpenList() const
 	float lowestTotalCost;
 	for (NavMeshNode *node : openList)
 	{
+		/*
 		float thisCost = node->getTotalCost();
 		if (!lowestCostNode || thisCost < lowestTotalCost)
 		{
 			lowestCostNode = node;
 			lowestTotalCost = thisCost;
 		}
+		*/
 	}
 
 	return lowestCostNode;
@@ -126,21 +128,21 @@ void AStarPathfinder::calculateStep()
 			if (!isNodeOnOpenList(*j))
 			{
 				openList.push_back(*j);
-				(*j)->setForwardCost(navMesh->calculateDistanceBetweenNodes(*j, goalNode));
-				(*j)->setBackwardsCost(currentNode->getBackwardsCost() + navMesh->calculateDistanceBetweenNodes(currentNode, *j));
-				(*j)->updateTotalCost();
+				//(*j)->setForwardCost(navMesh->calculateDistanceBetweenNodes(*j, goalNode));
+				//(*j)->setBackwardsCost(currentNode->getBackwardsCost() + navMesh->calculateDistanceBetweenNodes(currentNode, *j));
+				//(*j)->updateTotalCost();
 				(*j)->setPathPointer(currentNode);
 			}
 			else
 			{
-				float currentBackwardsCost = (*j)->getBackwardsCost();
-				float newBackwardsCost = currentNode->getBackwardsCost() + navMesh->calculateDistanceBetweenNodes(currentNode, *j);
+				//float currentBackwardsCost = (*j)->getBackwardsCost();
+				//float newBackwardsCost = currentNode->getBackwardsCost() + navMesh->calculateDistanceBetweenNodes(currentNode, *j);
 
-				if (newBackwardsCost < currentBackwardsCost)
+				//if (newBackwardsCost < currentBackwardsCost)
 				{
 					(*j)->setPathPointer(currentNode);
-					(*j)->setBackwardsCost(newBackwardsCost);
-					(*j)->updateTotalCost();
+					//(*j)->setBackwardsCost(newBackwardsCost);
+					//(*j)->updateTotalCost();
 				}
 			}
 		}
